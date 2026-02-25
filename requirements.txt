@@ -1,0 +1,1 @@
+# Frappe is the only dependency - it's provided by the bench environment
