@@ -4,31 +4,239 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 @layer components {
   .btn-primary {
     @apply bg-brand-600 text-white px-4 py-2 rounded-lg font-medium
-           hover:bg-brand-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+           hover:bg-brand-700 active:scale-[0.98] transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
   }
 
   .btn-secondary {
     @apply bg-white text-gray-700 px-4 py-2 rounded-lg font-medium border border-gray-300
-           hover:bg-gray-50 transition-colors;
+           hover:bg-gray-50 active:scale-[0.98] transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium
+           hover:bg-red-700 active:scale-[0.98] transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply text-gray-600 px-4 py-2 rounded-lg font-medium
+           hover:bg-gray-100 hover:text-gray-900 active:scale-[0.98] transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
   }
 
   .card {
-    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm;
+    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm
+           transition-shadow duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-md hover:border-gray-300;
   }
 
   .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg text-sm
-           focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition;
+    @apply w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm
+           focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none
+           transition-all duration-150 placeholder:text-gray-400;
   }
 
   .label {
     @apply block text-sm font-medium text-gray-700 mb-1;
   }
+
+  /* Skeleton loaders */
+  .skeleton {
+    @apply bg-gray-200 rounded animate-pulse;
+  }
+
+  .skeleton-text {
+    @apply skeleton h-4 w-full;
+  }
+
+  .skeleton-text-sm {
+    @apply skeleton h-3 w-3/4;
+  }
+
+  .skeleton-heading {
+    @apply skeleton h-8 w-48;
+  }
+
+  .skeleton-circle {
+    @apply skeleton rounded-full;
+  }
+
+  .skeleton-card {
+    @apply card;
+  }
+
+  /* Status badges */
+  .badge {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full;
+  }
+
+  .badge-green {
+    @apply badge bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20;
+  }
+
+  .badge-yellow {
+    @apply badge bg-yellow-50 text-yellow-700 ring-1 ring-inset ring-yellow-600/20;
+  }
+
+  .badge-red {
+    @apply badge bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20;
+  }
+
+  .badge-purple {
+    @apply badge bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-600/20;
+  }
+
+  .badge-gray {
+    @apply badge bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-600/20;
+  }
+
+  .badge-orange {
+    @apply badge bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-600/20;
+  }
+
+  /* Toast notification */
+  .toast {
+    @apply fixed bottom-6 right-6 z-[100] flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg
+           border text-sm font-medium max-w-sm transition-all duration-300;
+  }
+
+  .toast-success {
+    @apply toast bg-green-50 border-green-200 text-green-800;
+  }
+
+  .toast-error {
+    @apply toast bg-red-50 border-red-200 text-red-800;
+  }
+
+  .toast-info {
+    @apply toast bg-blue-50 border-blue-200 text-blue-800;
+  }
+
+  .toast-warning {
+    @apply toast bg-yellow-50 border-yellow-200 text-yellow-800;
+  }
+}
+
+@layer utilities {
+  /* Fade-in animation for page transitions */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.3s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Stagger delay classes for list animations */
+  .stagger-1 { animation-delay: 0.05s; animation-fill-mode: both; }
+  .stagger-2 { animation-delay: 0.1s; animation-fill-mode: both; }
+  .stagger-3 { animation-delay: 0.15s; animation-fill-mode: both; }
+  .stagger-4 { animation-delay: 0.2s; animation-fill-mode: both; }
+  .stagger-5 { animation-delay: 0.25s; animation-fill-mode: both; }
+  .stagger-6 { animation-delay: 0.3s; animation-fill-mode: both; }
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(135deg, #4c6ef5, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Number counter animation (for landing page) */
+@property --num {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.counter-animate {
+  transition: --num 2s ease-out;
+  counter-reset: num var(--num);
+}
+
+.counter-animate::after {
+  content: counter(num);
 }

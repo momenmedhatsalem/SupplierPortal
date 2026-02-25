@@ -2,28 +2,28 @@
   <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
     <!-- Logo -->
     <div class="h-16 flex items-center px-5 border-b border-gray-100">
-      <router-link to="/suppliers/dashboard" class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
+      <router-link to="/suppliers/dashboard" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
           <span class="text-white font-bold text-sm">J</span>
         </div>
         <span class="font-bold text-gray-900">Justyol</span>
         <span class="text-xs text-gray-400">Portal</span>
       </router-link>
       <!-- Close button (mobile only) -->
-      <button @click="$emit('close')" class="ml-auto lg:hidden p-1 text-gray-400 hover:text-gray-600">
+      <button @click="$emit('close')" class="ml-auto lg:hidden p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
       <router-link
         v-for="item in navItems"
         :key="item.name"
         :to="item.to"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150"
         :class="isActive(item.to)
-          ? 'bg-brand-50 text-brand-700'
+          ? 'bg-brand-50 text-brand-700 shadow-sm'
           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'"
         @click="$emit('close')"
       >
@@ -34,15 +34,22 @@
 
     <!-- Supplier info (bottom) -->
     <div v-if="supplier" class="p-4 border-t border-gray-100">
-      <div class="text-sm font-medium text-gray-900 truncate">{{ supplier.supplier_name }}</div>
-      <div class="text-xs text-gray-500 truncate">{{ supplier.country }}</div>
-      <div class="mt-1">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0">
+          {{ supplier.supplier_name?.charAt(0)?.toUpperCase() || 'S' }}
+        </div>
+        <div class="min-w-0">
+          <div class="text-sm font-medium text-gray-900 truncate">{{ supplier.supplier_name }}</div>
+          <div class="text-xs text-gray-500 truncate">{{ supplier.country }}</div>
+        </div>
+      </div>
+      <div class="mt-2">
         <span
-          class="text-xs px-2 py-0.5 rounded-full"
+          class="badge"
           :class="{
-            'bg-green-100 text-green-700': supplier.portal_status === 'Active',
-            'bg-yellow-100 text-yellow-700': supplier.portal_status === 'Pending Approval',
-            'bg-red-100 text-red-700': supplier.portal_status === 'Suspended',
+            'badge-green': supplier.portal_status === 'Active',
+            'badge-yellow': supplier.portal_status === 'Pending Approval',
+            'badge-red': supplier.portal_status === 'Suspended',
           }"
         >
           {{ supplier.portal_status || 'Active' }}
