@@ -1,8 +1,9 @@
-import preset from "frappe-ui/src/utils/tailwind.config";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  presets: [preset],
+  presets: [require("frappe-ui/src/utils/tailwind.config")],
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
