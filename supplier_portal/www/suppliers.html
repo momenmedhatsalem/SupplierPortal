@@ -1,0 +1,16 @@
+{%- extends "templates/web.html" %}
+
+{%- block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justyol Supplier Portal</title>
+{{ include_style("supplier_portal.bundle.css") }}
+{%- endblock %}
+
+{%- block page_content %}
+<div id="app"></div>
+{%- endblock %}
+
+{%- block script %}
+{{ include_script("supplier_portal.bundle.js") }}
+{%- endblock %}

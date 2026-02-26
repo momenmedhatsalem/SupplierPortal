@@ -8,6 +8,7 @@ app_license = "MIT"
 # Website route rules - serves the Vue SPA for all /suppliers/* routes
 website_route_rules = [
     {"from_route": "/suppliers/<path:app_path>", "to_route": "suppliers"},
+    {"from_route": "/suppliers", "to_route": "suppliers"},
 ]
 
 # Guest-accessible methods (no login required)
